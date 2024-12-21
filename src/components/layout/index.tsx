@@ -1,4 +1,5 @@
 import Header from '../header';
+import MenuModal from '../header/menu-modal';
 
 type Props = {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
       <Header />
       <div className=''>{children}</div>
       {/* Footer */}
+      <MenuModal />
     </div>
   );
 };

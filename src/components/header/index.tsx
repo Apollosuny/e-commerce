@@ -1,3 +1,5 @@
+'use client';
+
 import {
   BLOG,
   CART,
@@ -6,10 +8,16 @@ import {
   OUR_STORY,
   SHOP,
 } from '@/libs/constant/routes';
+import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import Link from 'next/link';
+import HeaderMobile from './header-mobile';
 
 const Header: React.FC = () => {
-  return (
+  const isMobile = useIsMobile();
+
+  return isMobile ? (
+    <HeaderMobile />
+  ) : (
     <div className='h-24 w-full flex items-center px-4'>
       <div className='relative flex items-center justify-between flex-1'>
         <div className='flex items-center gap-10'>
