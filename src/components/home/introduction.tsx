@@ -1,11 +1,31 @@
+'use client';
+import { useIsMobile } from '@/libs/hooks/use-is-mobile';
+import classNames from 'classnames';
 import { ArrowRight, FlameKindling, Milk, Sprout, Star } from 'lucide-react';
 import Image from 'next/image';
 
 const Introduction: React.FC = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className='grid grid-cols-5 border-t-2 border-b-2 border-dashed'>
-      <div className='col-span-2 border-r-2 border-dashed max-h-[600px]'>
-        <div className='flex items-center justify-center py-5 border-b-2 border-dashed h-[250px]'>
+    <div
+      className={classNames(
+        'grid grid-cols-5 border-t-2 border-b-2 border-dashed',
+        isMobile && '!grid-cols-1'
+      )}
+    >
+      <div
+        className={classNames(
+          'col-span-2 border-r-2 border-dashed max-h-[600px]',
+          isMobile && '!border-r-0'
+        )}
+      >
+        <div
+          className={classNames(
+            'flex items-center justify-center py-5 border-b-2 border-dashed h-[250px]',
+            isMobile && 'px-4'
+          )}
+        >
           <div className='flex items-center gap-10'>
             <div className='relative bg-[#faf6f3] rounded-full !w-32 !h-52'></div>
             <div className='flex flex-col gap-y-4'>
@@ -48,12 +68,22 @@ const Introduction: React.FC = () => {
         </div>
         <div className='flex items-center justify-center h-[calc(600px-250px)]'>
           <div className='max-w-[360px]'>
-            <p className='text-sm text-[#4f4f4] font-medium'>
+            <p
+              className={classNames(
+                'text-sm text-[#4f4f4] font-medium',
+                isMobile && 'text-center'
+              )}
+            >
               Our groovy and captivating designs, combined with high-quality,
               non-toxic ingredients, are the perfect way to set the mood for
               mindfulness
             </p>
-            <button className='bg-[#1d1d1a] p-4 text-[#cdcdcd] rounded-lg w-2/3 mt-8 font-normal'>
+            <button
+              className={classNames(
+                'bg-[#1d1d1a] p-4 text-[#cdcdcd] rounded-lg w-2/3 mt-8 font-normal',
+                isMobile && 'w-full'
+              )}
+            >
               Shop now
             </button>
             <div className='flex items-center justify-center gap-6 mt-16'>
