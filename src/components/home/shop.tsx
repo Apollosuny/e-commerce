@@ -17,8 +17,7 @@ const Shop: React.FC = () => {
       >
         <div
           className={classNames(
-            'border-r-2 border-dashed',
-            !isMobile && 'col-span-2'
+            !isMobile && 'col-span-2 border-r-2 border-dashed'
           )}
         >
           <div className='pt-10 py-14 ml-16'>
@@ -26,7 +25,7 @@ const Shop: React.FC = () => {
               <p
                 className={classNames(
                   'font-["Bodoni"] text-8xl font-medium',
-                  isMobile && 'text-5xl'
+                  isMobile && '!text-5xl'
                 )}
               >
                 Shop our
@@ -35,7 +34,7 @@ const Shop: React.FC = () => {
                 <p
                   className={classNames(
                     'font-["Bodoni"] text-8xl font-medium',
-                    isMobile && 'text-5xl'
+                    isMobile && '!text-5xl'
                   )}
                 >
                   latest
@@ -51,7 +50,7 @@ const Shop: React.FC = () => {
               <p
                 className={classNames(
                   'font-["Bodoni"] text-8xl font-medium',
-                  isMobile && 'text-5xl'
+                  isMobile && '!text-5xl'
                 )}
               >
                 collection
@@ -62,7 +61,7 @@ const Shop: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className='border-r-2 border-dashed'>
+        <div className={classNames(!isMobile && 'border-r-2 border-dashed')}>
           <ProductCard />
         </div>
         <ProductCard />
@@ -95,7 +94,7 @@ const Shop: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className='border-r-2 border-dashed'>
+        <div className={classNames(!isMobile && 'border-r-2 border-dashed')}>
           <ProductCard />
         </div>
         <ProductCard />

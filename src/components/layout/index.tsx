@@ -1,3 +1,4 @@
+import Footer from '../footer';
 import Header from '../header';
 import MenuModal from '../header/menu-modal';
 
@@ -12,6 +13,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
       <Header />
       <div className=''>{children}</div>
       {/* Footer */}
+      <Footer />
       <MenuModal />
     </div>
   );
