@@ -1,4 +1,5 @@
 'use client';
+import classNames from 'classnames';
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -7,25 +8,27 @@ type Props = {
   isTopProduct?: boolean;
   isOutOfStockSoon?: boolean;
   remainingStock?: number;
+  hasPadding?: boolean;
 };
 
 const ProductCard: React.FC<Props> = ({
   isTopProduct,
   isOutOfStockSoon,
   remainingStock,
+  hasPadding = true,
 }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
   return (
-    <div className='relative p-6'>
-      <div className=''>
+    <div className={classNames('relative', hasPadding && 'p-6')}>
+      <div className='overflow-hidden'>
         <Image
           src='https://images.pexels.com/photos/9518974/pexels-photo-9518974.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
           alt='product'
           width={0}
           height={0}
           sizes={'100%'}
-          className='w-full max-h-[360px] object-cover'
+          className='w-full max-h-[360px] object-cover hover:scale-110 transition-all duration-300'
         />
       </div>
       <div className='mt-3'>
@@ -39,7 +42,7 @@ const ProductCard: React.FC<Props> = ({
             <Star size={12} fill='#f3a505' stroke='#f3a505' />
           </div>
         </div>
-        <p className='text-[#565656] mt-2'>
+        <p className='text-[#565656] mt-2 line-clamp-2'>
           a calming and relaxing scent that can help promote restful sleep.
         </p>
         <div className='flex items-center justify-between mt-3'>
@@ -48,7 +51,10 @@ const ProductCard: React.FC<Props> = ({
         </div>
       </div>
       <div
-        className='absolute top-8 right-8'
+        className={classNames(
+          'absolute top-8 right-8',
+          !hasPadding && '!top-6 !right-6'
+        )}
         tabIndex={-1}
         role='button'
         onClick={() => setIsLiked(!isLiked)}
