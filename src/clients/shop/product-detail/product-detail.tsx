@@ -107,8 +107,8 @@ const ProductDetailPage: React.FC = () => {
             </div>
             <div className='mt-4 flex items-start justify-center flex-col gap-y-3'>
               <p>
-                Burn 'em one at a time, or burn them together. Just be sure to
-                pick your favorites.
+                Burn &apos;em one at a time, or burn them together. Just be sure
+                to pick your favorites.
               </p>
               <p>
                 Our favorite combos:
@@ -154,8 +154,8 @@ const ProductDetailPage: React.FC = () => {
               Create a bespoke combo & save.
             </p>
             <p className='text-white text-sm'>
-              Burn 'em one at a time, or burn them together. Just be sure to
-              pick your favorites.
+              Burn &apos;em one at a time, or burn them together. Just be sure
+              to pick your favorites.
             </p>
           </div>
         </div>
