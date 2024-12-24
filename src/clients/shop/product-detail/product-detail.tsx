@@ -6,7 +6,7 @@ import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import classNames from 'classnames';
 import { Minus, Plus, Share2 } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -14,6 +14,7 @@ const ProductDetailPage: React.FC = () => {
   const isMobile = useIsMobile();
   const [showContent1, setshowContent1] = useState<boolean>(false);
   const [numberOfProduct, setnumberOfProduct] = useState<number>(1);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const onIncrease = () => {
     setnumberOfProduct(numberOfProduct + 1);
@@ -25,17 +26,30 @@ const ProductDetailPage: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (
+        scrollPosition > 200 &&
+        scrollPosition + windowHeight < documentHeight - 500
+      ) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-      slidesToSlide: 3, // optional, default to 1.
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 2, // optional, default to 1.
-    },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
@@ -44,7 +58,7 @@ const ProductDetailPage: React.FC = () => {
   };
 
   return (
-    <div className={classNames('px-20 mb-10', isMobile && '!px-4')}>
+    <div className={classNames('px-20 mb-10', isMobile && '!px-4 relative')}>
       <div
         className={classNames(
           'grid grid-cols-2 gap-x-4',
@@ -171,21 +185,25 @@ const ProductDetailPage: React.FC = () => {
               Pick 3 Classic Candles
             </h2>
             <h3 className='text-xl font-medium mt-3'>$195</h3>
-            <div className='flex items-center justify-between border p-4 w-1/4 mt-3'>
-              <button className='' onClick={onDecrease}>
-                <Minus size={16} stroke='#ababab' />
-              </button>
-              <span>{numberOfProduct}</span>
-              <button className='' onClick={onIncrease}>
-                <Plus size={16} stroke='#1c1c1c' />
-              </button>
-            </div>
-            <button className='flex items-center justify-center p-4 border mt-4 w-full'>
-              ADD TO CART
-            </button>
-            <div className='underline cursor-pointer w-full flex items-center justify-center mt-2'>
-              More payment options
-            </div>
+            {!isMobile && (
+              <>
+                <div className='flex items-center justify-between border p-4 w-1/4 mt-3'>
+                  <button className='' onClick={onDecrease}>
+                    <Minus size={16} stroke='#ababab' />
+                  </button>
+                  <span>{numberOfProduct}</span>
+                  <button className='' onClick={onIncrease}>
+                    <Plus size={16} stroke='#1c1c1c' />
+                  </button>
+                </div>
+                <button className='flex items-center justify-center p-4 border mt-4 w-full'>
+                  ADD TO CART
+                </button>
+                <div className='underline cursor-pointer w-full flex items-center justify-center mt-2'>
+                  More payment options
+                </div>
+              </>
+            )}
             <div className='mt-4 flex items-start justify-center flex-col gap-y-3'>
               <p>
                 Burn &apos;em one at a time, or burn them together. Just be sure
@@ -304,6 +322,14 @@ const ProductDetailPage: React.FC = () => {
       </div>
       <div className='mt-16 relative'>
         <SuggestProducts />
+      </div>
+      <div
+        className={classNames(
+          'sticky bottom-16 w-full h-12 bg-black opacity-0 translate-y-10 transition-all duration-300 ease-in-out flex items-center justify-center text-white cursor-pointer',
+          isVisible && 'opacity-100 translate-y-0'
+        )}
+      >
+        ADD TO CART
       </div>
     </div>
   );
