@@ -44,6 +44,7 @@ const MenuModal: React.FC = () => {
                 'text-lg',
                 pathName === HOME && 'font-semibold'
               )}
+              onClick={hide}
             >
               Home
             </Link>

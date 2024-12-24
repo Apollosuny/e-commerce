@@ -4,3 +4,4 @@ export const NEW_ARRIVAL = '/new-arrival';
 export const OUR_STORY = '/our-story';
 export const BLOG = '/blog';
 export const CART = '/cart';
+export const PRODUCT_DETAIL = SHOP + '/products';
