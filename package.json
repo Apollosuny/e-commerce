@@ -16,6 +16,7 @@
     "next": "15.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-multi-carousel": "^2.8.5",
     "zustand": "4.5.4"
   },
   "devDependencies": {
