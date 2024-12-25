@@ -1,4 +1,5 @@
 import Advertise from '../advertise';
+import CartModal from '../cart/cart-modal';
 import Footer from '../footer';
 import Header from '../header';
 import MenuModal from '../header/menu-modal';
@@ -17,6 +18,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
       {/* Footer */}
       <Footer />
       <MenuModal />
+      <CartModal />
     </div>
   );
 };

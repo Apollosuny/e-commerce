@@ -2,7 +2,6 @@
 
 import {
   BLOG,
-  CART,
   HOME,
   NEW_ARRIVAL,
   OUR_STORY,
@@ -11,9 +10,11 @@ import {
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import Link from 'next/link';
 import HeaderMobile from './header-mobile';
+import { useCartStore } from '@/stores/cart.store';
 
 const Header: React.FC = () => {
   const isMobile = useIsMobile();
+  const [open] = useCartStore((state) => [state.open]);
 
   return isMobile ? (
     <HeaderMobile />
@@ -29,14 +30,12 @@ const Header: React.FC = () => {
         <div className='flex items-center gap-10'>
           <Link href={OUR_STORY}>Our Story</Link>
           <Link href={BLOG}>Blog</Link>
-          <Link href={CART}>
-            <div className='flex items-center gap-4'>
-              <p className=''>Cart</p>
-              <div className='!w-7 !h-7 bg-[#05070c] rounded-full text-white flex items-center justify-center'>
-                0
-              </div>
+          <button className='flex items-center gap-4' onClick={open}>
+            <p className=''>Cart</p>
+            <div className='!w-7 !h-7 bg-[#05070c] rounded-full text-white flex items-center justify-center'>
+              0
             </div>
-          </Link>
+          </button>
         </div>
       </div>
     </div>

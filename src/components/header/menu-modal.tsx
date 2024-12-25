@@ -1,5 +1,11 @@
 'use client';
-import { HOME } from '@/libs/constant/routes';
+import {
+  BLOG,
+  HOME,
+  NEW_ARRIVAL,
+  OUR_STORY,
+  SHOP,
+} from '@/libs/constant/routes';
 import { useMenuStore } from '@/stores/menu.store';
 import classNames from 'classnames';
 import { X } from 'lucide-react';
@@ -47,6 +53,46 @@ const MenuModal: React.FC = () => {
               onClick={hide}
             >
               Home
+            </Link>
+            <Link
+              href={SHOP}
+              className={classNames(
+                'text-lg',
+                pathName === SHOP && 'font-semibold'
+              )}
+              onClick={hide}
+            >
+              Shop
+            </Link>
+            <Link
+              href={NEW_ARRIVAL}
+              className={classNames(
+                'text-lg',
+                pathName === NEW_ARRIVAL && 'font-semibold'
+              )}
+              onClick={hide}
+            >
+              New Arrival
+            </Link>
+            <Link
+              href={OUR_STORY}
+              className={classNames(
+                'text-lg',
+                pathName === OUR_STORY && 'font-semibold'
+              )}
+              onClick={hide}
+            >
+              Our Story
+            </Link>
+            <Link
+              href={BLOG}
+              className={classNames(
+                'text-lg',
+                pathName === BLOG && 'font-semibold'
+              )}
+              onClick={hide}
+            >
+              Our Story
             </Link>
           </div>
           <div className='absolute right-4 top-6'>
