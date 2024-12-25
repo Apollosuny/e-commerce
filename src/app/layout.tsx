@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Lora } from 'next/font/google';
 import './globals.css';
 import MainLayout from '@/components/layout';
+import Providers from './providers';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const lora = Lora({
   variable: '--font-lora',
@@ -27,7 +29,9 @@ export default function RootLayout({
         <title>EcoBrew</title>
       </head>
       <body className={`${lora.variable}`}>
-        <MainLayout>{children}</MainLayout>
+        <Providers>
+          <MainLayout>{children}</MainLayout>
+        </Providers>
       </body>
     </html>
   );

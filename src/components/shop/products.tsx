@@ -1,13 +1,23 @@
+/* eslint-disable */
 'use client';
 import { ChevronDown } from 'lucide-react';
 import ProductCard from '../product/product-card';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
+import { useQuery } from '@tanstack/react-query';
+import { getAllProducts } from '@/api/products';
+import Skeleton from 'react-loading-skeleton';
 
 const Products: React.FC = () => {
   const [isOpenedMenu, setIsOpenedMenu] = useState<boolean>(true);
   const isMobile = useIsMobile();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['products'],
+    queryFn: getAllProducts,
+  });
+
   return (
     <div
       className={classNames(
@@ -65,15 +75,21 @@ const Products: React.FC = () => {
             isMobile && '!grid-cols-2 pl-4'
           )}
         >
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
-          <ProductCard hasPadding={false} />
+          {isLoading
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className=''>
+                  <Skeleton height='360px' className='w-full' />
+                  <Skeleton count={1} />
+                  <Skeleton count={2} />
+                </div>
+              ))
+            : (data ?? []).map((product: any) => (
+                <ProductCard
+                  key={product.id}
+                  data={product}
+                  hasPadding={false}
+                />
+              ))}
         </div>
       </div>
     </div>

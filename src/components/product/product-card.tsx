@@ -1,5 +1,6 @@
 'use client';
 import { PRODUCT_DETAIL } from '@/libs/constant/routes';
+import { formatNumberWithCustomSeparators } from '@/libs/helpers/number';
 import classNames from 'classnames';
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
@@ -7,6 +8,15 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type Props = {
+  data: {
+    id: string;
+    name: string;
+    price: string;
+    previewImage: string;
+    images: string[];
+    description: string;
+    type: string;
+  };
   isTopProduct?: boolean;
   isOutOfStockSoon?: boolean;
   remainingStock?: number;
@@ -14,6 +24,7 @@ type Props = {
 };
 
 const ProductCard: React.FC<Props> = ({
+  data,
   isTopProduct,
   isOutOfStockSoon,
   remainingStock,
@@ -36,18 +47,18 @@ const ProductCard: React.FC<Props> = ({
         onKeyDown={handleRedirectToDetail}
       >
         <Image
-          src='https://images.pexels.com/photos/9518974/pexels-photo-9518974.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+          src={data.previewImage}
           alt='product'
           width={0}
           height={0}
           sizes={'100%'}
-          className='w-full max-h-[360px] object-cover hover:scale-110 transition-all duration-300'
+          className='w-full h-[360px] object-cover hover:scale-110 transition-all duration-300'
         />
       </div>
       <div className='mt-3'>
-        <button onClick={handleRedirectToDetail}>
-          <div className='flex items-center justify-between'>
-            <h3 className='font-semibold text-lg'>Lavender</h3>
+        <button onClick={handleRedirectToDetail} className='w-full'>
+          <div className='flex items-center justify-between w-full'>
+            <h3 className='font-semibold text-lg'>{data.name}</h3>
             <div className='flex items-center gap-1'>
               <Star size={12} fill='#f3a505' stroke='#f3a505' />
               <Star size={12} fill='#f3a505' stroke='#f3a505' />
@@ -56,13 +67,13 @@ const ProductCard: React.FC<Props> = ({
               <Star size={12} fill='#f3a505' stroke='#f3a505' />
             </div>
           </div>
-          <p className='text-[#565656] mt-2 line-clamp-2'>
-            a calming and relaxing scent that can help promote restful sleep.
-          </p>
+          <p className='text-[#565656] mt-2 line-clamp-2'>{data.description}</p>
         </button>
         <div className='flex items-center justify-between mt-3'>
           <p className='underline text-lg font-medium'>Order Now</p>
-          <p className='font-bold text-lg'>$9.99</p>
+          <p className='font-bold text-lg'>
+            {formatNumberWithCustomSeparators(parseInt(data.price))} VND
+          </p>
         </div>
       </div>
       <div
