@@ -3,9 +3,20 @@ import Image from 'next/image';
 import ProductCard from '../product/product-card';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import classNames from 'classnames';
+import { useQuery } from '@tanstack/react-query';
+import { getProductHighlights } from '@/api/products';
+import Skeleton from 'react-loading-skeleton';
+import { useRouter } from 'next/navigation';
+import { SHOP } from '@/libs/constant/routes';
 
 const Shop: React.FC = () => {
   const isMobile = useIsMobile();
+  const router = useRouter();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['product-highlight'],
+    queryFn: getProductHighlights,
+  });
 
   return (
     <div className='px-4'>
@@ -56,15 +67,34 @@ const Shop: React.FC = () => {
                 collection
               </p>
             </div>
-            <button className='mt-8 border rounded-lg w-1/3 p-4'>
+            <button
+              className='mt-8 border rounded-lg w-1/3 p-4'
+              onClick={() => router.push(SHOP)}
+            >
               See All
             </button>
           </div>
         </div>
         <div className={classNames(!isMobile && 'border-r-2 border-dashed')}>
-          <ProductCard />
+          {isLoading ? (
+            <div className='p-4'>
+              <Skeleton height='360px' className='w-full' />
+              <Skeleton count={1} />
+              <Skeleton count={2} />
+            </div>
+          ) : (
+            data && <ProductCard data={data[0]} />
+          )}
         </div>
-        <ProductCard />
+        {isLoading ? (
+          <div className='p-4'>
+            <Skeleton height='360px' className='w-full' />
+            <Skeleton count={1} />
+            <Skeleton count={2} />
+          </div>
+        ) : (
+          data && <ProductCard data={data[1]} />
+        )}
       </div>
       <div
         className={classNames(
@@ -95,9 +125,25 @@ const Shop: React.FC = () => {
           </div>
         </div>
         <div className={classNames(!isMobile && 'border-r-2 border-dashed')}>
-          <ProductCard />
+          {isLoading ? (
+            <div className='p-4'>
+              <Skeleton height='360px' className='w-full' />
+              <Skeleton count={1} />
+              <Skeleton count={2} />
+            </div>
+          ) : (
+            data && <ProductCard data={data[2]} />
+          )}
         </div>
-        <ProductCard />
+        {isLoading ? (
+          <div className='p-4'>
+            <Skeleton height='360px' className='w-full' />
+            <Skeleton count={1} />
+            <Skeleton count={2} />
+          </div>
+        ) : (
+          data && <ProductCard data={data[3]} />
+        )}
       </div>
     </div>
   );

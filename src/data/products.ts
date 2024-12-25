@@ -91,3 +91,58 @@ export const productList = [
     type: 'sachet',
   },
 ];
+
+export const productHighlights = [
+  {
+    id: 1,
+    name: 'Something',
+    price: '335000',
+    previewImage:
+      'https://i.pinimg.com/736x/97/8f/27/978f2763395e2bea8a9b298b6933af10.jpg',
+    images: [
+      'https://i.pinimg.com/736x/97/8f/27/978f2763395e2bea8a9b298b6933af10.jpg',
+      'https://i.pinimg.com/736x/f4/29/8f/f4298f941a036123b09d8a7378089673.jpg',
+    ],
+    description: 'This is a description',
+    type: 'candle',
+  },
+  {
+    id: 2,
+    name: 'Something',
+    price: '140000',
+    previewImage:
+      'https://i.etsystatic.com/20263210/r/il/358d95/6209064303/il_794xN.6209064303_49qp.jpg',
+    images: [
+      'https://i.etsystatic.com/20263210/r/il/42fe3c/6160999732/il_794xN.6160999732_4a7u.jpg',
+      'https://i.etsystatic.com/20263210/r/il/cafc66/6160999234/il_794xN.6160999234_nbmf.jpg',
+    ],
+    description: 'This is a description',
+    type: 'candle',
+  },
+  {
+    id: 3,
+    name: 'Something',
+    price: '225000',
+    previewImage:
+      'https://i.etsystatic.com/29037752/r/il/d66ce2/5499963652/il_794xN.5499963652_1blg.jpg',
+    images: [
+      'https://i.etsystatic.com/29037752/r/il/d66ce2/5499963652/il_794xN.5499963652_1blg.jpg',
+      'https://i.etsystatic.com/29037752/r/il/12bb6e/5520627081/il_794xN.5520627081_go3u.jpg',
+    ],
+    description: 'This is a description',
+    type: 'candle',
+  },
+  {
+    id: 4,
+    name: 'Coffee Mocha',
+    price: '450000',
+    previewImage:
+      'https://i.etsystatic.com/10813860/r/il/9e7bf9/5688709655/il_794xN.5688709655_i20j.jpg',
+    images: [
+      'https://i.etsystatic.com/10813860/r/il/9e7bf9/5688709655/il_794xN.5688709655_i20j.jpg',
+      'https://i.etsystatic.com/10813860/r/il/d9c766/5688711837/il_794xN.5688711837_mhkr.jpg',
+    ],
+    description: 'This is a description',
+    type: 'candle',
+  },
+];

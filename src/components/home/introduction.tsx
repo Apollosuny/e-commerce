@@ -1,11 +1,14 @@
 'use client';
+import { SHOP } from '@/libs/constant/routes';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import classNames from 'classnames';
 import { ArrowRight, FlameKindling, Milk, Sprout, Star } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Introduction: React.FC = () => {
   const isMobile = useIsMobile();
+  const router = useRouter();
 
   return (
     <div
@@ -83,6 +86,7 @@ const Introduction: React.FC = () => {
                 'bg-[#1d1d1a] p-4 text-[#cdcdcd] rounded-lg w-2/3 mt-8 font-normal',
                 isMobile && 'w-full'
               )}
+              onClick={() => router.push(SHOP)}
             >
               Shop now
             </button>
