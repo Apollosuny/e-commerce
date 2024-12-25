@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.62.10",
     "@types/luxon": "^3.4.2",
+    "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "lucide-react": "^0.469.0",
     "luxon": "^3.5.0",
