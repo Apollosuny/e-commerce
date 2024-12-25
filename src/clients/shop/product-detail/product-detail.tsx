@@ -323,14 +323,16 @@ const ProductDetailPage: React.FC = () => {
       <div className='mt-16 relative'>
         <SuggestProducts />
       </div>
-      <div
-        className={classNames(
-          'sticky bottom-16 w-full h-12 bg-black opacity-0 translate-y-10 transition-all duration-300 ease-in-out flex items-center justify-center text-white cursor-pointer',
-          isVisible && 'opacity-100 translate-y-0'
-        )}
-      >
-        ADD TO CART
-      </div>
+      {isMobile && (
+        <div
+          className={classNames(
+            'sticky bottom-16 w-full h-12 bg-black opacity-0 translate-y-10 transition-all duration-300 ease-in-out flex items-center justify-center text-white cursor-pointer',
+            isVisible && 'opacity-100 translate-y-0'
+          )}
+        >
+          ADD TO CART
+        </div>
+      )}
     </div>
   );
 };
