@@ -5,6 +5,7 @@ import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import Link from 'next/link';
 import HeaderMobile from './header-mobile';
 import { useCartStore } from '@/stores/cart.store';
+import Image from 'next/image';
 
 const Header: React.FC = () => {
   const isMobile = useIsMobile();
@@ -20,7 +21,15 @@ const Header: React.FC = () => {
           <Link href={SHOP}>Shop</Link>
           <div>New Arrival</div>
         </div>
-        <div className='w-36 h-11 rounded-xl bg-red-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'></div>
+        <div className='rounded-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-24'>
+          <Image
+            src='/assets/images/logo-no-bg.png'
+            alt='logo'
+            width='200'
+            height='100'
+            className='object-cover'
+          />
+        </div>
         <div className='flex items-center gap-10'>
           <Link href={OUR_STORY}>Our Story</Link>
           <div>Blog</div>
