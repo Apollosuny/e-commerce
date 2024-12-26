@@ -23,7 +23,7 @@ const handleError = (error: any) => {
 };
 
 const apolloAxios = axios.create({
-  baseURL: 'http://localhost:3001/api',
+  baseURL: process.env.NEXT_PUBLIC_BASE_API || '',
   timeout: 300000,
   headers: {
     'Content-Type': 'application/json',
