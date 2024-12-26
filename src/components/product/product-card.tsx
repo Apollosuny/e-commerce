@@ -34,7 +34,7 @@ const ProductCard: React.FC<Props> = ({
   const router = useRouter();
 
   const handleRedirectToDetail = () => {
-    router.push(PRODUCT_DETAIL + '/123');
+    router.push(PRODUCT_DETAIL + '/' + data.id);
   };
 
   return (

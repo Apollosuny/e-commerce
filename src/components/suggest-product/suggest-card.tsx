@@ -1,18 +1,31 @@
 'use client';
 
+import { formatNumberWithCustomSeparators } from '@/libs/helpers/number';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import classNames from 'classnames';
 import { Plus } from 'lucide-react';
 import Image from 'next/image';
 
-const SuggestCard: React.FC = () => {
+type Props = {
+  data: {
+    id: number;
+    name: string;
+    price: string;
+    previewImage: string;
+    images: string[];
+    description: string;
+    type: string;
+  };
+};
+
+const SuggestCard: React.FC<Props> = ({ data }) => {
   const isMobile = useIsMobile();
 
   return (
     <div className=''>
       <div className='relative'>
         <Image
-          src='https://brooklyncandlestudio.com/cdn/shop/products/Tulum_Brooklyn_Candle_Studio.jpg?v=1722543675&width=800'
+          src={data.previewImage}
           alt='Product-Preview-1'
           width={0}
           height={0}
@@ -45,17 +58,19 @@ const SuggestCard: React.FC = () => {
             isMobile && '!text-base'
           )}
         >
-          Fern + Moss Jar Candle
+          {data.name}
         </p>
         <p
           className={classNames(
-            'text-xs text-[#121212] text-center',
+            'text-xs text-[#121212] text-center line-clamp-2',
             isMobile && '!text-[10px]'
           )}
         >
-          Smells like: A nature walk after the rain.
+          {data.description}
         </p>
-        <p className='text-lg text-[#121212]'>$28.00</p>
+        <p className='text-lg text-[#121212]'>
+          {formatNumberWithCustomSeparators(parseInt(data.price))} VND
+        </p>
       </div>
     </div>
   );

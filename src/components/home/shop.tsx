@@ -110,7 +110,7 @@ const Shop: React.FC = () => {
         >
           <div className='relative'>
             <Image
-              src='https://images.pexels.com/photos/6259444/pexels-photo-6259444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              src='https://i.pinimg.com/736x/9e/db/6a/9edb6a4c7c17a3604acab49993945f1d.jpg'
               alt='Products'
               width={0}
               height={0}

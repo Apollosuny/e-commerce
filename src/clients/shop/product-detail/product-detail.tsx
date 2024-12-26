@@ -1,16 +1,32 @@
+/* eslint-disable */
 'use client';
 
+import { getProductDetail } from '@/api/products';
 import CandleTips from '@/components/candle-tips';
 import SuggestProducts from '@/components/suggest-product';
+import { formatNumberWithCustomSeparators } from '@/libs/helpers/number';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { Minus, Plus, Share2 } from 'lucide-react';
 import Image from 'next/image';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 const ProductDetailPage: React.FC = () => {
+  const { id: productId } = useParams();
+
+  const { data } = useQuery({
+    queryKey: ['product', { id: productId }],
+    queryFn: async () => await getProductDetail(productId as string),
+    enabled: !!productId,
+  });
+
+  console.log(data);
+
   const isMobile = useIsMobile();
   const [showContent1, setshowContent1] = useState<boolean>(false);
   const [numberOfProduct, setnumberOfProduct] = useState<number>(1);
@@ -57,6 +73,33 @@ const ProductDetailPage: React.FC = () => {
     },
   };
 
+  if (!data) {
+    return (
+      <div className='px-20 mb-10 h-screen'>
+        <div className='grid grid-cols-2 gap-x-4'>
+          <Skeleton height='400px' className='w-full' />
+          <div className='flex flex-col items-center justify-start gap-3'>
+            <div className='flex flex-col items-center justify-start gap-1 w-full'>
+              <Skeleton count={1} className='min-w-[300px]' />
+              <Skeleton count={1} className='min-w-[300px]' />
+              <Skeleton count={1} className='min-w-[300px]' />
+            </div>
+            <div className='flex flex-col items-center justify-start gap-1 w-full'>
+              <Skeleton count={1} className='min-w-[300px]' />
+              <Skeleton count={1} className='min-w-[300px]' />
+              <Skeleton count={1} className='min-w-[300px]' />
+            </div>
+            <div className='flex flex-col items-center justify-start gap-1 w-full'>
+              <Skeleton count={1} className='min-w-[300px]' />
+              <Skeleton count={1} className='min-w-[300px]' />
+              <Skeleton count={1} className='min-w-[300px]' />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={classNames('px-20 mb-10', isMobile && '!px-4 relative')}>
       <div
@@ -84,41 +127,31 @@ const ProductDetailPage: React.FC = () => {
               itemClass='carousel-item-padding-40-px'
               className='w-full h-full'
             >
-              <Image
-                src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-classic-candles-brooklyn-candle-studio-491484.jpg?v=1724448684&width=800'
-                alt='Product-Preview-1'
-                width={0}
-                height={0}
-                sizes='100%'
-                className='w-full h-full object-cover'
-              />
-              <Image
-                src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-escapist-candles-brooklyn-candle-studio-101525.jpg?v=1724289007&width=800'
-                alt='Product-Preview-2'
-                width={0}
-                height={0}
-                sizes='100%'
-                className='w-full h-full object-cover'
-              />
+              {data.images.map((image: any) => (
+                <Image
+                  key={image}
+                  src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-classic-candles-brooklyn-candle-studio-491484.jpg?v=1724448684&width=800'
+                  alt='Product-Preview-1'
+                  width={0}
+                  height={0}
+                  sizes='100%'
+                  className='w-full h-full object-cover'
+                />
+              ))}
             </Carousel>
           ) : (
             <>
-              <Image
-                src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-classic-candles-brooklyn-candle-studio-491484.jpg?v=1724448684&width=800'
-                alt='Product-Preview-1'
-                width={0}
-                height={0}
-                sizes='100%'
-                className='w-full h-full object-cover'
-              />
-              <Image
-                src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-escapist-candles-brooklyn-candle-studio-101525.jpg?v=1724289007&width=800'
-                alt='Product-Preview-2'
-                width={0}
-                height={0}
-                sizes='100%'
-                className='w-full h-full object-cover'
-              />
+              {data.images.map((image: any) => (
+                <Image
+                  key={image}
+                  src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-classic-candles-brooklyn-candle-studio-491484.jpg?v=1724448684&width=800'
+                  alt='Product-Preview-1'
+                  width={0}
+                  height={0}
+                  sizes='100%'
+                  className='w-full h-full object-cover'
+                />
+              ))}
             </>
           )}
 
@@ -181,10 +214,10 @@ const ProductDetailPage: React.FC = () => {
             <div className='bg-[#767474] p-1 text-sm w-fit text-white'>
               BUNDLE AND SAVE
             </div>
-            <h2 className='text-2xl font-semibold mt-3'>
-              Pick 3 Classic Candles
-            </h2>
-            <h3 className='text-xl font-medium mt-3'>$195</h3>
+            <h2 className='text-2xl font-semibold mt-3'>{data.name}</h2>
+            <h3 className='text-xl font-medium mt-3'>
+              {formatNumberWithCustomSeparators(data.price)} VND
+            </h3>
             {!isMobile && (
               <>
                 <div className='flex items-center justify-between border p-4 w-1/4 mt-3'>
@@ -285,9 +318,11 @@ const ProductDetailPage: React.FC = () => {
           </div>
         )}
       </div>
-      <div className='mt-16'>
-        <CandleTips />
-      </div>
+      {data.type === 'candle' && (
+        <div className='mt-16'>
+          <CandleTips />
+        </div>
+      )}
       <div className='mt-16 relative'>
         <Image
           src='https://brooklyncandlestudio.com/cdn/shop/files/Shot_6_Brooklyn_Candle_Studio_386.jpg?v=1709053352&width=1800'

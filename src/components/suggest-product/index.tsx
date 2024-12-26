@@ -1,10 +1,18 @@
+/* eslint-disable */
 'use client';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import SuggestCard from './suggest-card';
 import classNames from 'classnames';
+import { useQuery } from '@tanstack/react-query';
+import { getProductSuggestion } from '@/api/products';
+import Skeleton from 'react-loading-skeleton';
 
 const SuggestProducts: React.FC = () => {
   const isMobile = useIsMobile();
+  const { data, isLoading } = useQuery({
+    queryKey: ['product-suggest'],
+    queryFn: getProductSuggestion,
+  });
 
   return (
     <div className=''>
@@ -17,11 +25,15 @@ const SuggestProducts: React.FC = () => {
           isMobile && '!grid-cols-2'
         )}
       >
-        <SuggestCard />
-        <SuggestCard />
-        <SuggestCard />
-        <SuggestCard />
-        <SuggestCard />
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className=''>
+                <Skeleton height='360px' className='w-full' />
+                <Skeleton count={1} />
+                <Skeleton count={2} />
+              </div>
+            ))
+          : data?.map((item: any) => <SuggestCard key={item.id} data={item} />)}
       </div>
     </div>
   );
