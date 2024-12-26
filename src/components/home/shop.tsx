@@ -68,7 +68,7 @@ const Shop: React.FC = () => {
               </p>
             </div>
             <button
-              className='mt-8 border rounded-lg w-1/3 p-4'
+              className='mt-8 border rounded-lg w-1/3 p-4 hover:scale-110 transition-all duration-300'
               onClick={() => router.push(SHOP)}
             >
               See All

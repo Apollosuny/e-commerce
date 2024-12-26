@@ -84,16 +84,14 @@ const MenuModal: React.FC = () => {
             >
               Our Story
             </Link>
-            <Link
-              href={BLOG}
+            <div
               className={classNames(
                 'text-lg',
                 pathName === BLOG && 'font-semibold'
               )}
-              onClick={hide}
             >
-              Our Story
-            </Link>
+              Blog
+            </div>
           </div>
           <div className='absolute right-4 top-6'>
             <X size={30} onClick={hide} />

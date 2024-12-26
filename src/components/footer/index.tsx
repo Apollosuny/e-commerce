@@ -1,8 +1,10 @@
 'use client';
 
+import { HOME, NEW_ARRIVAL, OUR_STORY, SHOP } from '@/libs/constant/routes';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import classNames from 'classnames';
 import { DateTime } from 'luxon';
+import Link from 'next/link';
 
 const Footer: React.FC = () => {
   const isMobile = useIsMobile();
@@ -23,15 +25,22 @@ const Footer: React.FC = () => {
                 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
             )}
           ></div>
-          <div className='flex items-center gap-3'>
-            <p>Shop</p>
-            <p>Shop</p>
-            <p>Shop</p>
+          <div className='flex items-center gap-8'>
+            <Link href={HOME} className={classNames('text-lg')}>
+              Home
+            </Link>
+            <Link href={SHOP} className={classNames('text-lg')}>
+              Shop
+            </Link>
+            <Link href={NEW_ARRIVAL} className={classNames('text-lg')}>
+              New Arrival
+            </Link>
           </div>
-          <div className='flex items-center gap-3'>
-            <p>Shop</p>
-            <p>Shop</p>
-            <p>Shop</p>
+          <div className='flex items-center gap-8'>
+            <Link href={OUR_STORY} className={classNames('text-lg')}>
+              Our Story
+            </Link>
+            <div className={classNames('text-lg')}>Blog</div>
           </div>
         </div>
         <div className='text-center mt-4'>

@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  BLOG,
-  HOME,
-  NEW_ARRIVAL,
-  OUR_STORY,
-  SHOP,
-} from '@/libs/constant/routes';
+import { HOME, OUR_STORY, SHOP } from '@/libs/constant/routes';
 import { useIsMobile } from '@/libs/hooks/use-is-mobile';
 import Link from 'next/link';
 import HeaderMobile from './header-mobile';
@@ -24,12 +18,12 @@ const Header: React.FC = () => {
         <div className='flex items-center gap-10'>
           <Link href={HOME}>Home</Link>
           <Link href={SHOP}>Shop</Link>
-          <Link href={NEW_ARRIVAL}>New Arrival</Link>
+          <div>New Arrival</div>
         </div>
         <div className='w-36 h-11 rounded-xl bg-red-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'></div>
         <div className='flex items-center gap-10'>
           <Link href={OUR_STORY}>Our Story</Link>
-          <Link href={BLOG}>Blog</Link>
+          <div>Blog</div>
           <button className='flex items-center gap-4' onClick={open}>
             <p className=''>Cart</p>
             <div className='!w-7 !h-7 bg-[#05070c] rounded-full text-white flex items-center justify-center'>
