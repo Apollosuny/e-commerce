@@ -130,7 +130,7 @@ const ProductDetailPage: React.FC = () => {
               {data.images.map((image: any) => (
                 <Image
                   key={image}
-                  src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-classic-candles-brooklyn-candle-studio-491484.jpg?v=1724448684&width=800'
+                  src={image}
                   alt='Product-Preview-1'
                   width={0}
                   height={0}
@@ -144,7 +144,7 @@ const ProductDetailPage: React.FC = () => {
               {data.images.map((image: any) => (
                 <Image
                   key={image}
-                  src='https://brooklyncandlestudio.com/cdn/shop/files/pick-3-classic-candles-brooklyn-candle-studio-491484.jpg?v=1724448684&width=800'
+                  src={image}
                   alt='Product-Preview-1'
                   width={0}
                   height={0}
